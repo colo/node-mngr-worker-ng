@@ -1,0 +1,22 @@
+{
+  "name": "js-pipeline.input.imap",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/colo/js-pipeline.input.imap.git"
+  },
+  "author": "Luciano Bueno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/colo/js-pipeline.input.imap/issues"
+  },
+  "homepage": "https://github.com/colo/js-pipeline.input.imap#readme",
+  "dependencies": {
+    "node-app-imap-client": "git+https://github.com/colo/node-app-imap-client.git"
+  }
+}

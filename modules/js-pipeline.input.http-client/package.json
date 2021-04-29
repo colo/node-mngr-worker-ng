@@ -1,0 +1,22 @@
+{
+  "name": "js-pipeline.input.http-client",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/colo/js-pipeline.input.http-client.git"
+  },
+  "author": "Luciano Bueno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/colo/js-pipeline.input.httpClient/issues"
+  },
+  "homepage": "https://github.com/colo/js-pipeline.input.httpClient#readme",
+  "dependencies": {
+    "node-app-http-client": "git+https://github.com/colo/node-app-http-client.git"
+  }
+}

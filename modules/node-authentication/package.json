@@ -1,0 +1,55 @@
+{
+  "_args": [
+    [
+      "git+https://github.com/colo/node-authentication.git",
+      "/home/colo/projects/mngr-ui-admin"
+    ]
+  ],
+  "_from": "git+https://github.com/colo/node-authentication.git",
+  "_id": "node-authentication@git+https://github.com/colo/node-authentication.git#a16acdb42a40b98ee9f22c1e62d3d73df7a31c46",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/node-authentication",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "git+https://github.com/colo/node-authentication.git",
+    "rawSpec": "git+https://github.com/colo/node-authentication.git",
+    "saveSpec": "git+https://github.com/colo/node-authentication.git",
+    "fetchSpec": "https://github.com/colo/node-authentication.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "/node-express-app/node-express-authentication"
+  ],
+  "_resolved": "git+https://github.com/colo/node-authentication.git#a16acdb42a40b98ee9f22c1e62d3d73df7a31c46",
+  "_spec": "git+https://github.com/colo/node-authentication.git",
+  "_where": "/home/colo/projects/mngr-ui-admin",
+  "author": {
+    "name": "Luciano Bueno",
+    "email": "glamero@gmail.com"
+  },
+  "dependencies": {
+    "imap": "~0.8.14",
+    "mootools": "~1.5.1",
+    "rethinkdb": "^2.4.2"
+  },
+  "description": "Authentication module",
+  "devDependencies": {},
+  "engines": {
+    "node": ">= 0.4.8"
+  },
+  "keywords": [
+    "login",
+    "authentication"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
+  "name": "node-authentication",
+  "optionalDependencies": {},
+  "version": "0.0.1"
+}

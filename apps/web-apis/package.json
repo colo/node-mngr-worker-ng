@@ -1,0 +1,33 @@
+{
+  "name": "web-apis",
+  "version": "0.0.1",
+  "description": "Web Apis Pipeline",
+  "author": {
+    "name": "Luciano Bueno",
+    "email": "glamero@gmail.com"
+  },
+  "main": "./",
+  "engines": {
+    "node": ">= 0.10.21"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
+  "keywords": [
+    "login",
+    "authentication"
+  ],
+  "dependencies": {
+    "ipaddr.js": "^2.0.0",
+    "js-pipeline.input.httpclient": "git+https://github.com/colo/js-pipeline.input.http-client.git",
+    "js-pipeline.inputs.rethinkdb-rest": "git+https://github.com/colo/js-pipeline.inputs.rethinkdb-rest.git",
+    "js-pipeline.output.rethinkdb": "git+https://github.com/colo/js-pipeline.output.rethinkdb.git",
+    "pluralize": "^8.0.0",
+    "qs": "^6.9.6"
+  }
+}
