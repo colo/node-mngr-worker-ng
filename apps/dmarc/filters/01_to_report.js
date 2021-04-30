@@ -27,13 +27,15 @@ module.exports = function(payload){
   let {input, output } = payload
 
   let filter = function(doc, opts, next, pipeline){
-    let { id, req, type, input } = opts
+    let { req, type, input } = opts
 		debug('4rd filter', doc.msg)
 		// process.exit(1)
 		let ts = (doc.msg.date) ? moment(doc.msg.date).valueOf() : Date.now()
+		let id = opts.req.id+'.'+doc.data.report.org+':'+doc.data.policy.domain+'@'+ts
+		id = id.replace(/\s/g, '')
 		let report = {
 			// id: opts.req.id+'.'+doc.data.report.org+':'+doc.data.policy.domain+'@'+doc.data.report.range.start+'-'+doc.data.report.range.end,
-			id: opts.req.id+'.'+doc.data.report.org+':'+doc.data.policy.domain+'@'+ts,
+			id: id,
 			data: doc.data,
 			metadata: {
 				domain: doc.data.policy.domain,
