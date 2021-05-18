@@ -26,7 +26,7 @@ module.exports = function(payload){
 
 
   return filter
-  }
+}
 
 // module.exports = function(doc, opts, next, pipeline){
 //   debug('DOC', doc)

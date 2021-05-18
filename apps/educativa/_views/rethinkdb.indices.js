@@ -211,6 +211,13 @@ let MyApp = new Class({
       args:'timestamp',
       row: this.r.row("metadata")("timestamp")
     })
+
+		this.indexCreate({
+      uri: params.options.uri+'/'+params.options.args[0],
+      args:'domain',
+      row: this.r.row("metadata")("domain")
+    })
+
     this.indexCreate({
       uri: params.options.uri+'/'+params.options.args[0],
       args:'host',

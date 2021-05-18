@@ -105,13 +105,13 @@ module.exports = new Class({
   },
 	get: function (req, resp, next){
     debug('GET %o', req.params, req.body, req.query)
+		// process.exit(1)
 		resp.json({id: this.options.id+':'+os.hostname()})
 	},
   post: function (req, resp, next){
 		debug('POST %o', req.params, req.body, req.query)
-    resp.json({status: 'accepted'})
-
-    this.fireEvent(
+		resp.json({status: 'accepted'})
+		this.fireEvent(
       this.ON_DOC,
       [
         // {
