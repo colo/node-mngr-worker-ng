@@ -24,7 +24,7 @@ module.exports = function(payload){
   // let group_index = (opts && opts.group_index !== undefined) ? opts.group_index : DEFAULT_GROUP_INDEX
 
   let filter = function(doc, opts, next, pipeline){
-    // debug('parse', doc, opts.input.options.id)
+    debug('parse', doc, opts.input.options.id)
     // process.exit(1)
 
     try  {
@@ -37,6 +37,8 @@ module.exports = function(payload){
       .fromString(doc.value)
       .then((json)=>{
         Array.each(json, function(result){
+					debug('result', result)
+			    // process.exit(1)
 
           result.size *=1024 //du -k reports on 1k units => *1024 trasnform to bytes
 					result.timestamp *=1
@@ -55,7 +57,7 @@ module.exports = function(payload){
             }
           }
 
-            debug('parsed line', new_doc)
+            debug('new doc', new_doc)
             next(new_doc)
         })
 

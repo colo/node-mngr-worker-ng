@@ -11,7 +11,7 @@
 ### HEADER ###
 
 #devel
-#source ../../../devel/etc/educativa/size.sh
+# source ../../../devel/etc/educativa/size.sh
 
 #prod
 source ../../../etc/educativa/size.sh
@@ -71,11 +71,14 @@ for dir in `ls -d */`; do
 	for user_dir in `ls -d */`; do
 		user_dir=`echo ${user_dir} | sed 's|\/||g'`
 		#size=`du $subdir | gawk -F '\t' '{print $1}'`
-		#echo $dir:$subdir:$size
+		echo "$dir:$user_dir"
+
 		cd ${user_dir}
 
 		for subdir in `ls -d */`; do
 			subdir=`echo ${subdir} | sed 's|\/||g'`
+			echo "$dir|$user_dir|$subdir"
+
 			size=`du -k $subdir | gawk -F '\t' '{print $1}'`
 			echo "$dir|$user_dir|$subdir|$size" >> ${LOG_FILE}
 			save "$dir|$user_dir|$subdir|$size"
