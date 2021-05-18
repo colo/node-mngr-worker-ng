@@ -66,7 +66,7 @@ save () {
 cd $DIRVISH_DIR
 for dir in `ls -d */`; do
 	dir=`echo ${dir} | sed 's|\/||g'`
-	cd ${dir}/${dir}-vhosts/lastest/tree/
+	cd ${dir}/${dir}-vhosts/lastest/
 
 	for user_dir in `ls -d */`; do
 		user_dir=`echo ${user_dir} | sed 's|\/||g'`
@@ -84,7 +84,7 @@ for dir in `ls -d */`; do
 		cd ..
 	done
 
-	cd ../../../../
+	cd ../../../
 done
 
 date=$(date '+%Y-%m-%d %H:%M:%S')
