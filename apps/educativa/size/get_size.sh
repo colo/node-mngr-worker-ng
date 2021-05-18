@@ -79,7 +79,7 @@ for dir in `ls -d */`; do
 			subdir=`echo ${subdir} | sed 's|\/||g'`
 			echo "$dir|$user_dir|$subdir"
 
-			size=`du -k $subdir | gawk -F '\t' '{print $1}'`
+			size=`du -sk $subdir | gawk -F '\t' '{print $1}'`
 			echo "$dir|$user_dir|$subdir|$size" >> ${LOG_FILE}
 			save "$dir|$user_dir|$subdir|$size"
 		done
