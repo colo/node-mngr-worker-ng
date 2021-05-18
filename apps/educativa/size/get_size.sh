@@ -10,11 +10,12 @@
 
 ### HEADER ###
 
-API_SERVER="http://localhost:9080/"
-CREDENTIALS="mngr:1234"
+#devel
+#source ../../../devel/etc/educativa/size.sh
 
-#PREFIX="/home/colo/projects/node-mngr-worker/devel/"
-PREFIX="/"
+#prod
+source ../../../etc/educativa/size.sh
+
 DIRVISH_DIR="${PREFIX}var/backups/dirvish/"
 LOCK_DIR="${PREFIX}var/lock/"
 LOG_DIR="${PREFIX}var/log/"
