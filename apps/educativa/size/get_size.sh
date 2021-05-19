@@ -66,28 +66,33 @@ save () {
 cd $DIRVISH_DIR
 for dir in `ls -d */`; do
 	dir=`echo ${dir} | sed 's|\/||g'`
-	cd ${dir}/${dir}-vhosts/lastest/
+	if [ -d "${dir}/${dir}-vhosts/lastest/" ]; then
+		cd ${dir}/${dir}-vhosts/lastest/
 
-	for user_dir in `ls -d */`; do
-		user_dir=`echo ${user_dir} | sed 's|\/||g'`
-		#size=`du $subdir | gawk -F '\t' '{print $1}'`
-		echo "$dir:$user_dir"
+		for user_dir in `ls -d */`; do
+			user_dir=`echo ${user_dir} | sed 's|\/||g'`
+			#size=`du $subdir | gawk -F '\t' '{print $1}'`
+			echo "$dir:$user_dir"
 
-		cd ${user_dir}
+			if [ -d "${user_dir}" ]; then
+				cd ${user_dir}
 
-		for subdir in `ls -d */`; do
-			subdir=`echo ${subdir} | sed 's|\/||g'`
-			echo "$dir|$user_dir|$subdir"
+				for subdir in `ls -d */`; do
+					subdir=`echo ${subdir} | sed 's|\/||g'`
+					echo "$dir|$user_dir|$subdir"
 
-			size=`du -sk $subdir | gawk -F '\t' '{print $1}'`
-			echo "$dir|$user_dir|$subdir|$size" >> ${LOG_FILE}
-			save "$dir|$user_dir|$subdir|$size"
+					size=`du -sk $subdir | gawk -F '\t' '{print $1}'`
+					echo "$dir|$user_dir|$subdir|$size" >> ${LOG_FILE}
+					save "$dir|$user_dir|$subdir|$size"
+				done
+
+				cd ..
+			fi
+
 		done
 
-		cd ..
-	done
-
-	cd ../../../
+		cd ../../../
+	fi
 done
 
 date=$(date '+%Y-%m-%d %H:%M:%S')
