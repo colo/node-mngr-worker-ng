@@ -71,36 +71,45 @@ for line in `cat ${QMAIL_DIR}/control/virtualdomains`; do
 	vdom=`echo ${line} | gawk -F ':' '{print $1}'`
 	#echo $vdom
 	#$VDOMINFO $vdom
-	#dom_dir=`$VDOMINFO $vdom | grep dir | sed 's|dir:||g' | xargs` #xargs trims var
 	dom_dir=`$VUSERINFO "postmaster@${vdom}" | grep dir | sed 's|dir:||g' | sed 's|\/postmaster||g' | xargs` #xargs trims var
 
-	##$VDOMINFO $vdom | grep dir
-	if [ -n "$dom_dir" ]; then
-		#echo $vdom
-		#echo $dom_dir
-		echo "$vdom|${dom_dir}"
-		#cd $dom_dir
-		if [ -f "${dom_dir}/vpasswd" ]; then
-			#echo "vpasswd exists."
-			while IFS= read -r vpasswd_line
-			do
-				#echo "$vpasswd_line"
-				account=`echo ${vpasswd_line} | gawk -F ':' '{print $1}'`
-				account_dir=`echo ${vpasswd_line} | gawk -F ':' '{print $6}'`
+	last_dir=`echo $dom_dir | gawk -F '/' '{print $NF}'`
+	echo "$vdom|${dom_dir}|$last_dir"
 
-				echo "$vdom|${account}|${account_dir}"
+	if [[ $vdom == $last_dir ]]; then
 
-				if [ -d "${account_dir}" ]; then
-					size=`du -sk $account_dir | gawk -F '\t' '{print $1}'`
-					echo "$vdom|${account}|${size}" >> ${LOG_FILE}
-					save "$vdom|${account}|${size}"
-				fi
+		if [ -n "$dom_dir" ]; then
+			#echo $vdom
+			#echo $dom_dir
+			echo "$vdom|${dom_dir}"
+			#cd $dom_dir
+			if [ -f "${dom_dir}/vpasswd" ]; then
+				#echo "vpasswd exists."
+				while IFS= read -r vpasswd_line
+				do
+					#echo "$vpasswd_line"
+					account=`echo ${vpasswd_line} | gawk -F ':' '{print $1}'`
+					account_dir=`echo ${vpasswd_line} | gawk -F ':' '{print $6}'`
 
-			done < "${dom_dir}/vpasswd"
+					echo "$vdom|${account}|${account_dir}"
+
+					if [ -d "${account_dir}" ]; then
+						size=`du -sk $account_dir | gawk -F '\t' '{print $1}'`
+						echo "$vdom|${account}|${account_dir}|${size}" #>> ${LOG_FILE}
+						#save "$vdom|${account}|${account_dir}|${size}"
+					fi
+
+				done < "${dom_dir}/vpasswd"
+			fi
+
+
 		fi
 
-
+	#else
+	#	echo "It's not"
+	#	exit 1
 	fi
+
 done
 
 date=$(date '+%Y-%m-%d %H:%M:%S')
