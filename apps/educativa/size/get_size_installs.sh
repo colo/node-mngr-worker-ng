@@ -48,7 +48,7 @@ echo "#Start: ${date}"  > ${LOG_FILE}
 
 save () {
 	ts=`date +%s%3N`
-	value="$1|$ts"
+	value="installs|$1|$ts"
 	resp=$(curl -s -u ${CREDENTIALS} --header "Content-Type: application/json" --request POST --data "{\"value\": \"$value\"}" ${API_SERVER})
 	status="$?"
 	#echo "response: ${response}"
