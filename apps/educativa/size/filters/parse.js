@@ -32,7 +32,7 @@ module.exports = function(payload){
       csv({
         delimiter: '|',
         noheader: true,
-        headers: ['hostname', 'user', 'install', 'size', 'timestamp']
+        headers: ['type','hostname', 'user', 'install', 'size', 'timestamp']
       })
       .fromString(doc.value)
       .then((json)=>{
@@ -43,12 +43,12 @@ module.exports = function(payload){
           result.size *=1024 //du -k reports on 1k units => *1024 trasnform to bytes
 					result.timestamp *=1
           let new_doc = {
-            id: result.hostname+'.'+result.user+'.'+result.install+'@'+result.timestamp,
+            id: result.type+'.'+result.hostname+'.'+result.user+'.'+result.install+'@'+result.timestamp,
             data: result.size,
             metadata: {
               host: result.hostname,
               // path: 'logs.nginx.'+doc.domain,
-              path: 'educativa.size',
+              path: 'educativa.size.'+result.type,
               domain: result.user+'/'+result.install,
               timestamp: result.timestamp,
               _timestamp: Date.now(), //doc creation
