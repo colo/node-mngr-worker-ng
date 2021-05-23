@@ -58,7 +58,7 @@ module.exports = function(payload){
           // }
 
           debug('new doc', result)
-          next(result)
+          next(result, opts, next, pipeline)
         })
 
       })
