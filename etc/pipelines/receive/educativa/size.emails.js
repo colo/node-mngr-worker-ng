@@ -5,7 +5,8 @@ const path = require('path')
 
 const filters = [
   require(path.join(process.cwd(), 'apps/http-receiver/filters/00_from_array_to_doc')),
-  require(path.join(process.cwd(), 'apps/educativa/size/filters/parse')),
+  require(path.join(process.cwd(), 'apps/educativa/size/filters/csv')),
+	require(path.join(process.cwd(), 'apps/educativa/size/filters/emails'))
 ]
 
 const JSPipelineInputHttpServer = require(path.join(process.cwd(), 'apps/http-receiver/input'))
@@ -18,7 +19,7 @@ const cron = require('node-cron')
 
 const port = 11100
 
-const debug = require('debug')('pipelines:receive:educativa:size:output')
+const debug = require('debug')('pipelines:receive:educativa:size.emails:output')
 
 let pipelines = [
 
@@ -27,7 +28,7 @@ let pipelines = [
   require(path.join(process.cwd(), 'apps/http-receiver/pipeline'))(
     {
       input: {
-        id: "input.educativa.size.http-receiver",
+        id: "input.educativa.size.emails.http-receiver",
 
         receivers: [
           new JSPipelineInputHttpServer(Object.merge(Object.clone(http_receiver), {port: port}))
@@ -52,16 +53,16 @@ let pipelines = [
 				// 	debug('OUTPUT', doc)
 				// }
         new JSPipelineOutput(Object.merge({
-          id: "output.rethinkdb.educativa.size",
+          id: "output.rethinkdb.educativa.size.emails",
 
           buffer:{
             // size: 1,
             // expire: 60001,
-            size: -1,//-1 =will add until expire | 0 = no buffer | N > 0 = limit buffer no more than N
-            // expire: 60000, //miliseconds until saving
-            // periodical: 10000 //how often will check if buffer timestamp has expire
-            expire: 1000, //miliseconds until saving
-            periodical: 500 //how often will check if buffer timestamp has expire
+            size: 0,//-1 =will add until expire | 0 = no buffer | N > 0 = limit buffer no more than N
+            // // expire: 60000, //miliseconds until saving
+            // // periodical: 10000 //how often will check if buffer timestamp has expire
+            // expire: 1000, //miliseconds until saving
+            // periodical: 500 //how often will check if buffer timestamp has expire
           },
 
           table: 'educativa'
@@ -96,64 +97,3 @@ let pipelines = [
 ]
 
 module.exports = pipelines
-
-
-// const path = require('path')
-//
-// const conn = require('../../../default.conn')()
-// const http_receiver = require('../../../http.receiver')
-//
-// const dir.size_remote_filters = [
-//   require(path.join(process.cwd(), 'apps/http-receiver/filters/00_from_array_to_doc')),
-//   require(path.join(process.cwd(), 'apps/dir.size/educativa/filters/parse')),
-// ]
-//
-//
-//
-//
-// let pipelines = [
-//
-// ]
-//
-// /**
-// * multiple connections
-// **/
-// const PORTS = [
-//   11080
-// ]
-//
-// Array.each(PORTS, function(port){
-//   pipelines.push(
-//     require(path.join(process.cwd(), 'apps/http-receiver/pipeline'))({
-//       input: Object.merge(Object.clone(http_receiver), {port: port}),
-//       output: [{
-//     		rethinkdb: {
-//     			id: "output.dir.size.rethinkdb",
-//     			conn: [
-//     				Object.merge(
-//               Object.clone(conn),
-//               {table: 'dir.size'}
-//             ),
-//     			],
-//     			module: require('js-pipeline.output.rethinkdb'),
-//           // module: require(path.join(process.cwd(), 'apps/dir.size/web/output/rethinkdb.geospatial')),
-//           buffer:{
-//     				size: -1, //-1
-//     				// expire:0
-//             // size: 1000,
-//             // expire: 999,
-//             expire: 1000,
-//             periodical: 500,
-//     			}
-//     		}
-//     	}],
-//       filters: Array.clone(dir.size_remote_filters),
-//       // opts: {
-//       //   schema: '$remote_addr - $remote_user [$time_local] '
-//       //       + '"$request" $status $body_bytes_sent "$http_referer" '
-//       //       + '"$http_user_agent" "$http_x_forwarded_for"'
-//       // }
-//     }),
-//   )
-// })
-// module.exports = pipelines

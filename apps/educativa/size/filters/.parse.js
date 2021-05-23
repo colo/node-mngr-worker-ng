@@ -57,8 +57,8 @@ module.exports = function(payload){
             }
           }
 
-            debug('new doc', new_doc)
-            next(new_doc)
+          debug('new doc', new_doc)
+          next(new_doc)
         })
 
       })
