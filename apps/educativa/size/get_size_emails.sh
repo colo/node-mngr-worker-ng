@@ -16,8 +16,10 @@
 #prod
 source ../../../etc/educativa/size.sh
 
-QMAIL_DIR="${PREFIX}var/qmail/"
-VDOMINFO="/var/vpopmail/bin/vdominfo"
+QMAIL_DIR="/var/qmail/"
+#some domains SegFault (and can't capture output)
+#VDOMINFO="/var/vpopmail/bin/vdominfo"
+VUSERINFO="/var/vpopmail/bin/vuserinfo"
 
 LOCK_DIR="${PREFIX}var/lock/"
 LOG_DIR="${PREFIX}var/log/"
@@ -69,7 +71,8 @@ for line in `cat ${QMAIL_DIR}/control/virtualdomains`; do
 	vdom=`echo ${line} | gawk -F ':' '{print $1}'`
 	#echo $vdom
 	#$VDOMINFO $vdom
-	dom_dir=`$VDOMINFO $vdom | grep dir | sed 's|dir:||g' | xargs` #xargs trims var
+	#dom_dir=`$VDOMINFO $vdom | grep dir | sed 's|dir:||g' | xargs` #xargs trims var
+	dom_dir=`$VUSERINFO "postmaster@${vdom}" | grep dir | sed 's|dir:||g' | sed 's|\/postmaster||g' | xargs` #xargs trims var
 
 	##$VDOMINFO $vdom | grep dir
 	if [ -n "$dom_dir" ]; then
