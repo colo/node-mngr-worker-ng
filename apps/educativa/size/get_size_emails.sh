@@ -95,8 +95,8 @@ for line in `cat ${QMAIL_DIR}/control/virtualdomains`; do
 
 					if [ -d "${account_dir}" ]; then
 						size=`du -sk $account_dir | gawk -F '\t' '{print $1}'`
-						echo "$vdom|${account}|${account_dir}|${size}" #>> ${LOG_FILE}
-						#save "$vdom|${account}|${account_dir}|${size}"
+						echo "$vdom|${account}|${size}" >> ${LOG_FILE}
+						save "$vdom|${account}|${size}"
 					fi
 
 				done < "${dom_dir}/vpasswd"
