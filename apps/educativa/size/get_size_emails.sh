@@ -96,6 +96,7 @@ for line in `cat ${QMAIL_DIR}/control/virtualdomains`; do
 					if [ -d "${account_dir}" ]; then
 						size=`du -sk $account_dir | gawk -F '\t' '{print $1}'`
 						last_auth=`$VUSERINFO "$account_dir@${vdom}" | grep 'last auth:' | sed 's|last\ auth:||g' | xargs` #xargs trims var
+						$VUSERINFO "$account_dir@${vdom}" | grep 'last auth:' | sed 's|last\ auth:||g' | xargs
 						echo "$vdom|${account}|${size}|${last_auth}" >> ${LOG_FILE}
 						save "$vdom|${account}|${size}|${last_auth}"
 					fi
