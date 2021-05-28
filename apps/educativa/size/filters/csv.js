@@ -17,7 +17,7 @@ const csv = require('csvtojson')
 
 module.exports = function(payload){
   let {input, output, opts } = payload
-	let headers = opts.headers || ['type','hostname', 'user', 'install', 'size', 'timestamp']
+	let headers = (opts && opts.headers) ? opts.headers : ['type','hostname', 'user', 'install', 'size', 'timestamp']
   // let type = input.type
   // let full_range = input.full_range
   // let table = input.clients.options.table
