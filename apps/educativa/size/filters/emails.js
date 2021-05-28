@@ -29,7 +29,10 @@ module.exports = function(payload){
 		doc.timestamp *=1
     let new_doc = {
       id: doc.type+'.'+doc.hostname+'.'+doc.user+'.'+doc.install+'@'+doc.timestamp,
-      data: doc.size,
+      data: {
+				size: doc.size,
+				last_auth: Date.parse(doc.last_auth)
+			},
       metadata: {
         host: doc.hostname,
         // path: 'logs.nginx.'+doc.domain,

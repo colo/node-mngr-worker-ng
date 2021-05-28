@@ -70,6 +70,11 @@ let pipelines = [
         Object.clone(conn))),
       ],
 
+			opts: {
+				headers: ['type','hostname', 'user', 'install', 'size', 'timestamp'],
+      },
+
+
       // opts: {
         /**
         * Nginx
@@ -87,9 +92,7 @@ let pipelines = [
       // },
 
 
-      // opts: {
-      //   group_index: 'metadata.host'
-      // },
+
     }
 
   ),

@@ -17,6 +17,7 @@ const csv = require('csvtojson')
 
 module.exports = function(payload){
   let {input, output, opts } = payload
+	let headers = opts.headers || ['type','hostname', 'user', 'install', 'size', 'timestamp']
   // let type = input.type
   // let full_range = input.full_range
   // let table = input.clients.options.table
@@ -32,7 +33,8 @@ module.exports = function(payload){
       csv({
         delimiter: '|',
         noheader: true,
-        headers: ['type','hostname', 'user', 'install', 'size', 'timestamp']
+        // headers: ['type','hostname', 'user', 'install', 'size', 'timestamp']
+				headers: headers
       })
       .fromString(doc.value)
       .then((json)=>{
