@@ -31,7 +31,7 @@ module.exports = function(payload){
       id: doc.type+'.'+doc.hostname+'.'+doc.user+'.'+doc.install+'@'+doc.timestamp,
       data: {
 				size: doc.size,
-				last_auth: Date.parse(doc.last_auth)
+				last_auth: Date.parse(doc.last_auth) || '-'
 			},
       metadata: {
         host: doc.hostname,
